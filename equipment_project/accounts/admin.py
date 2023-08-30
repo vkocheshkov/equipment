@@ -15,7 +15,7 @@ class CustomUserAdmin(UserAdmin):
                 # Preserve any entries in the dict other than "fields".
                 **{key: value for (key, value) in fieldset[1].items() if key != "fields"},
                 # Add the "bio" field to the existing fields
-                "fields": fieldset[1]["fields"]
+                "fields": fieldset[1]["fields"],
             },
         )
         if fieldset[0] == "Personal info"

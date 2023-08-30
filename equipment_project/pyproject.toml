@@ -1,0 +1,11 @@
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+
+[tool.autoflake]
+exclude = ['venv', '*tmp*'] # WARNING! also pass this list of files to pre-commit-config.
+in-place = true
+remove-all-unused-imports = true
+ignore-init-module-imports = true
