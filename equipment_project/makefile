@@ -4,9 +4,9 @@
 build_run:
 	docker compose -f ../docker-compose.yml build
 	docker compose -f ../docker-compose.yml up -d
-	docker compose -f ../docker-compose.yml python manage.py makemigrations
-	docker compose -f ../docker-compose.yml python manage.py migrate
-	docker compose -f ../docker-compose.yml python manage.py createsuperuser
+	docker compose exec web python manage.py makemigrations
+	docker compose exec web python manage.py migrate
+	docker compose exec web python manage.py createsuperuser
 
 ######################################################################
 # Run in development mode
