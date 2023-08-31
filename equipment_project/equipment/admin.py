@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from equipment.models import EquipmentType, Equipment
+from equipment.models import Equipment, EquipmentType
 
 
 @admin.register(EquipmentType)
