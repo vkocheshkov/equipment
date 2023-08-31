@@ -12,7 +12,6 @@ class EquipmentTypeViewSet(ModelViewSet):
     Отвечает за предоставление информации о доступных типах оборудования. Доступна пагинация, а также возможность
     поиска путем указания query параметров советующим ключам ответа.
     """
-
     queryset = EquipmentType.objects.all()
     serializer_class = EquipmentTypeSerializer
     pagination_class = CustomPagination
