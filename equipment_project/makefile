@@ -4,8 +4,12 @@
 build_run:
 	docker compose -f ../docker-compose.yml build
 	docker compose -f ../docker-compose.yml up -d
+migrate:
 	docker compose exec backend python manage.py migrate
+superuser:
 	docker compose exec backend python manage.py createsuperuser
+data:
+	docker compose exec backend python manage.py loaddata EquipmentType
 
 ######################################################################
 # Run in development mode
