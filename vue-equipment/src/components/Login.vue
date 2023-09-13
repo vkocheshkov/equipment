@@ -21,7 +21,6 @@
           <p v-if="incorrectAuth">Неверные логин и пароль, попробуйте ввести заново</p>
           <br>
           <button type="submit" class="btn btn-primary py-3 w-100 mb-4" @click="login">Sign In</button>
-          <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a></p>
         </div>
       </div>
     </div>

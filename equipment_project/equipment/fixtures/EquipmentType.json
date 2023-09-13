@@ -1,0 +1,32 @@
+[
+  {
+    "model": "equipment.EquipmentType",
+    "pk": 1,
+    "fields": {
+      "type_title": "TP-Link TL-WR74",
+      "sn_mask": "XXAAAAAXAA",
+      "created_at": "2023-01-01",
+      "updated_at": "2023-01-01"
+    }
+  },
+  {
+    "model": "equipment.EquipmentType",
+    "pk": 2,
+    "fields": {
+      "type_title": "D-Link DIR-300",
+      "sn_mask": "NXXAAXZXaa",
+      "created_at": "2023-01-01",
+      "updated_at": "2023-01-01"
+    }
+  },
+  {
+    "model": "equipment.EquipmentType",
+    "pk": 3,
+    "fields": {
+      "type_title": "D-Link DIR-300 E",
+      "sn_mask": "NAAAAXZXXX",
+      "created_at": "2023-01-01",
+      "updated_at": "2023-01-01"
+    }
+  }
+]

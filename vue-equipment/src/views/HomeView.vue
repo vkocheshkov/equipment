@@ -34,12 +34,12 @@
 
           <form class="d-none d-md-flex ms-4 mb-2">
             <input class="form-control border-0" type="search" placeholder="Search" v-model="searchFor"
-                   @keydown.enter="loadEquipment(this.current_page)">
+                   @keydown.enter.prevent="loadEquipment(this.current_page)">
           </form>
           <select class="form-select-pages mb-1" style="margin-left: auto; margin-right: 10px;" v-model="page_size" @change="loadEquipment(1)">
 <!--            <option selected value="0">Все</option>-->
             <option selected value="5">5</option>
-            <option value="15">10</option>
+            <option value="15">15</option>
             <option value="30">30</option>
           </select>
 
@@ -130,7 +130,6 @@ export default {
       let server_url = this.store.state.backendUrl+ '/equipment/'
       let searchFor = '?search=' + this.searchFor + '&page_size=' + this.page_size + '&p=' + page
       let backendUrl = server_url + searchFor
-      console.log(backendUrl)
       try {
         const response = await fetch(backendUrl,{
           method: 'GET',
@@ -170,12 +169,16 @@ export default {
     },
     processPaginationData(data){
       this.totalCount = data.count
-      this.pages = Math.floor(this.totalCount / this.page_size)
+      this.pages = this.getNumberOfPages()
       this.next_page = data.next
       this.previous_page = data.previous
       console.log(this.previous_page)
       console.log(this.next_page)
     },
+    getNumberOfPages(){
+      return this.totalCount % this.page_size !== 0 && this.totalCount > this.page_size ?
+          Math.floor(this.totalCount / this.page_size) + 1 : Math.floor(this.totalCount / this.page_size)
+    }
   }
 }
 </script>
