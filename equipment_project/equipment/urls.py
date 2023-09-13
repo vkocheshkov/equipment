@@ -10,7 +10,7 @@ from equipment import views
 
 router = routers.DefaultRouter()
 router.register(r"equipment-type", views.EquipmentTypeViewSet, basename="equipment-type")
-# router.register(r"key", views.DLMSMeterKeysViewSet, basename="keys")
+router.register(r"equipment", views.EquipmentViewSet, basename="equipment")
 
 urlpatterns = [
     path("schema/", SpectacularAPIView.as_view(), name="schema"),

@@ -31,7 +31,7 @@ DEBUG = bool(os.environ.get("DEBUG", default=1))
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
 ALLOWED_HOSTS = []
-
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_extensions',
     "drf_spectacular",
     "django_filters",
+    "corsheaders",
 
     # local
     'accounts.apps.AccountsConfig',
@@ -59,11 +60,14 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'equipment.unhandled_exceptions.UnhandledExceptionProcessorMiddleware',
 ]
 
 ROOT_URLCONF = 'equipment_project.urls'
@@ -152,6 +156,8 @@ REST_FRAMEWORK = {
         "rest_framework.renderers.BrowsableAPIRenderer",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DATETIME_FORMAT": "%Y-%m-%d %H:%M:%S",
+    "EXCEPTION_HANDLER": 'equipment.misc.custom_exception_handler'
 }
 
 SIMPLE_JWT = {
@@ -198,3 +204,5 @@ SPECTACULAR_SETTINGS = {
 "TITLE": "REST API интерфейс для работы с сущностью оборудование",
 "VERSION": "1.0.0",
 }
+
+CORS_ALLOWED_ORIGINS = ["http://localhost:8080", "http://127.0.0.1:8000", "http://127.0.0.1:8080"]
