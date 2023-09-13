@@ -6,9 +6,13 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from equipment.models import EquipmentType, Equipment
+from equipment.models import Equipment, EquipmentType
 from equipment.pagination import CustomPagination
-from equipment.serializers import EquipmentTypeSerializer, EquipmentSerializer, EquipmentCreateSerializer
+from equipment.serializers import (
+    EquipmentCreateSerializer,
+    EquipmentSerializer,
+    EquipmentTypeSerializer,
+)
 from equipment.service import check_serial_numbers_for_errors
 
 
@@ -17,6 +21,7 @@ class EquipmentTypeViewSet(ModelViewSet):
     Отвечает за предоставление информации о доступных типах оборудования. Доступна пагинация, а также возможность
     поиска путем указания query параметров советующим ключам ответа.
     """
+
     queryset = EquipmentType.objects.all()
     serializer_class = EquipmentTypeSerializer
     pagination_class = CustomPagination
@@ -31,6 +36,7 @@ class EquipmentViewSet(ModelViewSet):
     Отвечает за предоставление информации о доступных серийных номерах оборудования. Доступна пагинация, а также
      возможность поиска путем указания query параметров советующим ключам ответа.
     """
+
     queryset = Equipment.objects.all()
     serializer_class = EquipmentSerializer
     pagination_class = CustomPagination
@@ -63,5 +69,3 @@ class EquipmentViewSet(ModelViewSet):
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         else:
             raise ValidationError(serializer.errors)
-
-

@@ -1,7 +1,5 @@
-from rest_framework.exceptions import ValidationError
-
 from equipment.misc import get_pattern, validate_sn
-from equipment.models import EquipmentType, Equipment
+from equipment.models import Equipment, EquipmentType
 
 
 def check_serial_numbers_for_errors(serial_number_list, equipment_type):
@@ -10,7 +8,7 @@ def check_serial_numbers_for_errors(serial_number_list, equipment_type):
     if mask:
         pattern = get_pattern(mask)
         mask_errors = validate_sn(serial_number_list, pattern)
-    
+
         if mask_errors:
             error_message = "Серийные номера счетчиков " + ",".join(mask_errors) + " не совпадают с маской " + mask
             errors.append(error_message)
@@ -30,9 +28,3 @@ def check_serial_numbers_for_errors(serial_number_list, equipment_type):
         errors.append("Такого типа оборудования не существует")
 
     return errors
-
-
-
-
-
-

@@ -1,4 +1,4 @@
-from django.db import models, DatabaseError
+from django.db import models
 from rest_framework.exceptions import ValidationError
 
 
@@ -27,7 +27,7 @@ class EquipmentType(models.Model):
         try:
             mask = cls.objects.filter(id=equipment_type).first()
             return mask.sn_mask
-        except AttributeError as err:
+        except AttributeError:
             raise ValidationError(f"Ошибка базы данных при поиске типа оборудования {equipment_type}")
 
 
@@ -62,9 +62,8 @@ class Equipment(models.Model):
 
     @classmethod
     def add_equipment(cls, data):
-        data_for_adding = [cls(equipment_type=data.get("equipment_type"), serial_number=sn, note=data.get("note"))
-                     for sn in data.get("serial_numbers")]
+        data_for_adding = [
+            cls(equipment_type=data.get("equipment_type"), serial_number=sn, note=data.get("note"))
+            for sn in data.get("serial_numbers")
+        ]
         cls.objects.bulk_create(data_for_adding)
-
-
-

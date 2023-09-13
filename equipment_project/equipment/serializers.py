@@ -1,11 +1,8 @@
-import re
-
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import ModelSerializer
 
-from equipment.misc import get_pattern, validate_sn
-from equipment.models import EquipmentType, Equipment
+from equipment.models import Equipment, EquipmentType
 from equipment.service import check_serial_numbers_for_errors
 
 
@@ -13,6 +10,7 @@ class EquipmentTypeSerializer(ModelSerializer):
     """
     Отвечает за представление данных по таблице EquipmentType
     """
+
     class Meta:
         model = EquipmentType
         fields = ("id", "type_title", "sn_mask")
@@ -22,6 +20,7 @@ class EquipmentSerializer(ModelSerializer):
     """
     Отвечает за представление данных по таблице Equipment
     """
+
     class Meta:
         model = Equipment
         fields = ("id", "equipment_type", "serial_number", "note", "created_at", "updated_at")
@@ -30,9 +29,10 @@ class EquipmentSerializer(ModelSerializer):
 
 class EquipmentCreateSerializer(ModelSerializer):
     """
-    Отвечает за десереализацию данных при сохранении объекта оборудования, с учетом того, что в полу serial_numbers может
-    передаваться список серийных номеров
+    Отвечает за десереализацию данных при сохранении объекта оборудования, с учетом того, что в полу serial_numbers
+     может передаваться список серийных номеров
     """
+
     serial_numbers = serializers.ListField(child=serializers.CharField())
 
     class Meta:

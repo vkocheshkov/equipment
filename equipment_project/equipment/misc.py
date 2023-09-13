@@ -1,5 +1,6 @@
 import re
 from datetime import datetime
+
 from rest_framework.views import exception_handler
 
 
@@ -12,13 +13,7 @@ def get_pattern(sn_mask):
     • X - прописная буква латинского алфавита либо цифра от 0 до 9;
     • Z - символ из списка: -, _, @
     """
-    mask = {
-        "N": "\\d",
-        "A": "[A-Z]",
-        "a": "[a-z]",
-        "X": "[A-Z,0-9]",
-        "Z": "[-_@]"
-    }
+    mask = {"N": "\\d", "A": "[A-Z]", "a": "[a-z]", "X": "[A-Z,0-9]", "Z": "[-_@]"}
     pattern = "^"
     for item in sn_mask:
         mask_sign = mask.get(item, None)

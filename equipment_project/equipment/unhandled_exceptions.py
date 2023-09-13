@@ -1,7 +1,6 @@
 from django.http import JsonResponse
 from rest_framework import status
-from rest_framework.exceptions import ValidationError, APIException
-from rest_framework.views import exception_handler
+from rest_framework.exceptions import APIException
 
 
 class UnhandledExceptionProcessorMiddleware(object):
@@ -20,7 +19,4 @@ class UnhandledExceptionProcessorMiddleware(object):
         if not isinstance(exception, APIException):
             status_code = status.HTTP_400_BAD_REQUEST
 
-        return JsonResponse(
-            {"error": True, "description": str(exception)}, status=status_code)
-    
-
+        return JsonResponse({"error": True, "description": str(exception)}, status=status_code)
